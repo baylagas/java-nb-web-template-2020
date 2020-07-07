@@ -2,6 +2,7 @@ package javanbwebtemplate.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javanbwebtemplate.logic.PersonLogic;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,14 @@ public class PersonServlet extends HttpServlet
             String age = request.getParameter("age");
             String salary = request.getParameter("salary");
             
+            
+            PersonLogic logic = new PersonLogic("jdbc:mysql://localhost/cardexdb?"
+                    + "user=root&password=12345&"
+                    + "autoReconnect=true&useSSL=false");
+            int rows = logic.insertPerson(name, 
+                    Integer.parseInt(age), 
+                    Integer.parseInt(salary));
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -37,6 +46,8 @@ public class PersonServlet extends HttpServlet
             out.println("age: " + age);
             out.println("<br>");
             out.println("salary: " + salary);
+            out.println("<br>");
+            out.println("rows: " + rows);
             out.println("</body>");
             out.println("</html>");
         }
