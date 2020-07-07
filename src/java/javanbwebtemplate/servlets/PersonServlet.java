@@ -12,20 +12,31 @@ import javax.servlet.http.HttpServletResponse;
 public class PersonServlet extends HttpServlet 
 {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, 
+                                    HttpServletResponse response)
             throws ServletException, IOException 
     {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) 
         {
+            String name = request.getParameter("name");
+            String age = request.getParameter("age");
+            String salary = request.getParameter("salary");
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PersonServlet</title>");            
+            out.println("<title>New Person Server</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PersonServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>New Person Server</h1>");
+            out.println("<br>");
+            out.println("<p>bienvenidos al server</p>");
+            out.println("name: " + name);
+            out.println("<br>");
+            out.println("age: " + age);
+            out.println("<br>");
+            out.println("salary: " + salary);
             out.println("</body>");
             out.println("</html>");
         }
